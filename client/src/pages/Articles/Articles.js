@@ -6,6 +6,7 @@ import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input } from "../../components/Form";
 import Button from "../../components/Button";
+import Moment from 'react-moment';
 import "./Articles.css";
 
 class Articles extends Component {
@@ -157,7 +158,9 @@ class Articles extends Component {
                     >
                       Remove
                     </Button>
-                    <p>Publication Date: {article.date}</p>
+                    <p>
+                      Publication Date: <Moment format="MM/DD/YYYY">{article.date}</Moment>
+                    </p>
                   </ListItem>
                 ))}
               </List>
