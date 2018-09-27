@@ -1,0 +1,9 @@
+.jumbotron {
+  clear: "both";
+  margin-bottom: 0px;
+  text-align: "center";
+  background-image: url(./nytLogo.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: white;
+}

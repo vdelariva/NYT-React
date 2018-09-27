@@ -6,6 +6,7 @@ import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input } from "../../components/Form";
 import Button from "../../components/Button";
+import "./Articles.css";
 
 class Articles extends Component {
   state = {
@@ -68,6 +69,10 @@ class Articles extends Component {
   render() {
     return (
       <Container>
+        <Jumbotron>
+          {/* <h1>New York Times - Search Articles</h1> */}
+        </Jumbotron>
+        <p className="pHeader">Search for and annotate articles of interest!</p>
         <Row>
           <Col size="md-12">
             <Header>

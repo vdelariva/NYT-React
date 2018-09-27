@@ -1,0 +1,9 @@
+h3 {
+  color: #666;
+}
+.pHeader {
+  font-size: 1.5rem;
+  text-align: center;
+  border-bottom: solid lightgray 1px;
+  border-top: solid lightgray 1px;
+}

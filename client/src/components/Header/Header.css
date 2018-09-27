@@ -5,14 +5,11 @@
   margin-top: 20px;
   padding-top: 10px;
   text-align: center;
-  /* font-family: 'Alfa Slab One', cursive; */
   font-size: 3rem;
-  color: #666;
+  color: #333;
   text-shadow: 4px 4px 4px #aaa;
-  background-color: #e9ecef;
   border-radius: .3rem;
-  /* background-image: url("./passportStamps.jpg"); */
-  /* background-size: 300px 300px; */
+  background-image: url(./cross_scratches.png);
 }
 h1 {
   font-size: 3rem;
