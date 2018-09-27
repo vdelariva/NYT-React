@@ -11,12 +11,12 @@ mongoose.connect(
 const articleSeed = [
   {
     title: "Zoologists Admit You Really Got To Hand It To Bats For Learning To Fly",
-    link: "The Onion",
+    url: "https://www.theonion.com/zoologists-admit-you-really-got-to-hand-it-to-bats-for-1829268639",
     date: new Date(Date.now())
   },
   {
     title: "Skittles Unveils New Liqui-Gels For Fast-Acting Fruity Flavor",
-    link: "The Onion",
+    url: "https://www.theonion.com/skittles-unveils-new-liqui-gels-for-fast-acting-fruity-1829234334",
     date: new Date(Date.now())
   }
 ];

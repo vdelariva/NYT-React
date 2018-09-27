@@ -1,14 +1,15 @@
 import React, { Component } from "react";
-import DeleteBtn from "../../components/DeleteBtn";
 import Jumbotron from "../../components/Jumbotron";
+import Header from "../../components/Header";
 import API from "../../utils/API";
-import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
-import { Input, TextArea, FormBtn } from "../../components/Form";
+import { Input } from "../../components/Form";
+import Button from "../../components/Button";
 
 class Articles extends Component {
   state = {
+    results: [],
     articles: [],
     title: "",
     link: "",
@@ -24,11 +25,19 @@ class Articles extends Component {
 
   loadArticles = () => {
     API.getArticles()
-      .then(res =>
+      .then(res => {
+        // console.log(`getArticles res: ${JSON.stringify(res)}`)
         this.setState({ articles: res.data, title: "", link: "", date: "" })
-      )
+      })
       .catch(err => console.log(err));
   };
+
+  saveArticle = (article) => {
+    console.log(`Article Object: ${JSON.stringify(article)}`)
+    API.saveArticle({article})
+      .then(res => console.log("Article Saved"))
+      .catch(err => console.log(err));
+}
 
   deleteArticle = id => {
     API.deleteArticle(id)
@@ -49,7 +58,6 @@ class Articles extends Component {
     // Get articles via nyt api
     API.apiArticles(this.state.topic, this.state.startYear, this.state.endYear)
       .then(res => {
-        console.log(`Results: ${JSON.stringify(res)}`)
         this.setState({ results: res, topic: "", startyear: "", endyear: "" })
       })
       .catch(err => console.log(err));
@@ -57,12 +65,12 @@ class Articles extends Component {
 
   render() {
     return (
-      <Container fluid>
+      <Container>
         <Row>
-          <Col size="md-6">
-            <Jumbotron>
+          <Col size="md-12">
+            <Header>
               <h1>Search</h1>
-            </Jumbotron>
+            </Header>
             <form>
               <Input
                 value={this.state.topic}
@@ -82,32 +90,71 @@ class Articles extends Component {
                 name="endYear"
                 placeholder="End Year (YYYY)"
               />
-              <FormBtn
+              <Button
                 onClick={this.handleFormSubmit}
+                style={{ float: "right", marginBottom: 10 }}
+                className={"btn btn-success"}
               >
                 Search
-              </FormBtn>
+              </Button>
             </form>
           </Col>
-          <Col size="md-6 sm-12">
-            <Jumbotron>
+        </Row>
+        <Row>
+          <Col size="md-12">
+            <Header>
               <h1>Results</h1>
-            </Jumbotron>
-            {this.state.articles.length ? (
+            </Header>
+            {this.state.results.length ? (
               <List>
-                {this.state.articles.map(article => (
+                {this.state.results.map(article => (
                   <ListItem key={article._id}>
-                    <Link to={"/articles/" + article._id}>
+                    <a href={article.web_url} target="_blank">
                       <strong>
-                        {article.title}
+                        {article.headline.main}
                       </strong>
-                    </Link>
-                    <DeleteBtn onClick={() => this.deleteArticle(article._id)} />
+                    </a>
+                    <Button 
+                      onClick={() => this.saveArticle({title:article.headline.main, url:article.web_url, date:article.pub_date})}
+                      style={{ float: "right", marginBottom: 10 }}
+                      className={"btn btn-success"}
+                    >
+                      Save
+                    </Button>
                   </ListItem>
                 ))}
               </List>
             ) : (
               <h3>No Results to Display</h3>
+            )}
+          </Col>
+        </Row>
+        <Row>
+          <Col size="md-12">
+            <Header>
+              <h1>Saved Articles</h1>
+            </Header>
+            {this.state.articles.length ? (
+              <List>
+                {this.state.articles.map(article => (
+                  <ListItem key={article._id}>
+                    <a href={article.url} target="_blank">
+                      <strong>
+                        {article.title}
+                      </strong>
+                    </a>
+                    <Button 
+                      onClick={() => this.deleteArticle(article._id)}
+                      style={{ float: "right", marginBottom: 10 }}
+                      className={"btn btn-danger"}
+                    >
+                      Remove
+                    </Button>
+                  </ListItem>
+                ))}
+              </List>
+            ) : (
+              <h3>No Saved Articles</h3>
             )}
           </Col>
         </Row>
