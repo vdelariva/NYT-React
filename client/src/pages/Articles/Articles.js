@@ -35,7 +35,7 @@ class Articles extends Component {
   saveArticle = (article) => {
     console.log(`Article Object: ${JSON.stringify(article)}`)
     API.saveArticle({article})
-      .then(res => console.log("Article Saved"))
+      .then(res => this.loadArticles())
       .catch(err => console.log(err));
 }
 
