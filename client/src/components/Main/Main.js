@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import Jumbotron from "../../components/Jumbotron";
-import Header from "../../components/Header";
-import API from "../../utils/API";
-import { Col, Row, Container } from "../../components/Grid";
-import { List, ListItem } from "../../components/List";
-import { Input } from "../../components/Form";
-import Button from "../../components/Button";
 import Moment from 'react-moment';
-import "./Articles.css";
+import Jumbotron from "../Jumbotron";
+import Header from "../Header";
+import API from "../../utils/API";
+import { Col, Row, Container } from "../Grid";
+import { List, ListItem } from "../List";
+import { Input } from "../Form";
+import Button from "../Button";
+import "./Main.css";
 
-class Articles extends Component {
+class Main extends Component {
   state = {
     results: [],
     articles: [],
@@ -174,4 +174,4 @@ class Articles extends Component {
   }
 }
 
-export default Articles;
+export default Main;
