@@ -2,24 +2,24 @@ import axios from "axios";
 
 export default {
   // Get NYT articles using nytimes.com api
-  apiArticles: function(topic, startYear, endYear) {
+  apiArticles: function(topic, startDate, endDate) {
     const baseURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key="
     const apikey = "744063e2d6894d5d9009bfdd5398101d";
     const endURL = "&sort=newest&fl=web_url,headline,pub_date,_id";
     let url = "";
 
     // Build query URL
-    if (startYear === "" && endYear === "") {
+    if (startDate === "" && endDate === "") {
       url = `${baseURL}${apikey}&q=${topic}${endURL}`;
     }
-    else if (endYear !== "") {
-      url = `${baseURL}${apikey}&q=${topic}&end_date=${endYear}1231${endURL}`;
+    else if (endDate !== "") {
+      url = `${baseURL}${apikey}&q=${topic}&end_date=${endDate}${endURL}`;
     }
-    else if (startYear !== "") {
-      url = `${baseURL}${apikey}&q=${topic}&begin_date=${startYear}0101${endURL}`;
+    else if (startDate !== "") {
+      url = `${baseURL}${apikey}&q=${topic}&begin_date=${startDate}${endURL}`;
     }
     else {
-      url = `${baseURL}${apikey}&q=${topic}&begin_date=${startYear}0101&end_date=${endYear}1231${endURL}`;
+      url = `${baseURL}${apikey}&q=${topic}&begin_date=${startDate}&end_date=${endDate}${endURL}`;
     }
     
     return axios.get(url)

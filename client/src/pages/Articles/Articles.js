@@ -15,8 +15,8 @@ class Articles extends Component {
     link: "",
     date: "",
     topic: "",
-    startYear: "",
-    endYear: ""
+    startDate: "",
+    endDate: ""
   };
 
   componentDidMount() {
@@ -56,9 +56,9 @@ class Articles extends Component {
     event.preventDefault();
 
     // Get articles via nyt api
-    API.apiArticles(this.state.topic, this.state.startYear, this.state.endYear)
+    API.apiArticles(this.state.topic, this.state.startDate, this.state.endDate)
       .then(res => {
-        this.setState({ results: res, topic: "", startyear: "", endyear: "" })
+        this.setState({ results: res, topic: "", startDate: "", endDate: "" })
       })
       .catch(err => console.log(err));
   };
@@ -79,16 +79,16 @@ class Articles extends Component {
                 placeholder="Topic"
               />
               <Input
-                value={this.state.startYear}
+                value={this.state.startDate}
                 onChange={this.handleInputChange}
-                name="startYear"
-                placeholder="Start Year (YYYY)"
+                name="startDate"
+                placeholder="Start Date (YYYYMMDD)"
               />
               <Input
-                value={this.state.endYear}
+                value={this.state.endDate}
                 onChange={this.handleInputChange}
-                name="endYear"
-                placeholder="End Year (YYYY)"
+                name="endDate"
+                placeholder="End Date (YYYYMMDD)"
               />
               <Button
                 onClick={this.handleFormSubmit}
