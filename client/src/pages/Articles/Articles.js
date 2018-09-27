@@ -14,6 +14,7 @@ class Articles extends Component {
     title: "",
     link: "",
     date: "",
+    nytID: "",
     topic: "",
     startDate: "",
     endDate: ""
@@ -27,7 +28,7 @@ class Articles extends Component {
     API.getArticles()
       .then(res => {
         // console.log(`getArticles res: ${JSON.stringify(res)}`)
-        this.setState({ articles: res.data, title: "", link: "", date: "" })
+        this.setState({ articles: res.data, title: "", link: "", date: "", nytID: ""})
       })
       .catch(err => console.log(err));
   };
@@ -58,6 +59,7 @@ class Articles extends Component {
     // Get articles via nyt api
     API.apiArticles(this.state.topic, this.state.startDate, this.state.endDate)
       .then(res => {
+        // console.log(`apiArticles res: ${JSON.stringify(res)}`)
         this.setState({ results: res, topic: "", startDate: "", endDate: "" })
       })
       .catch(err => console.log(err));
@@ -69,7 +71,7 @@ class Articles extends Component {
         <Row>
           <Col size="md-12">
             <Header>
-              <h1>Search</h1>
+              Search
             </Header>
             <form>
               <Input
@@ -103,7 +105,7 @@ class Articles extends Component {
         <Row>
           <Col size="md-12">
             <Header>
-              <h1>Results</h1>
+              Results
             </Header>
             {this.state.results.length ? (
               <List>
@@ -115,7 +117,7 @@ class Articles extends Component {
                       </strong>
                     </a>
                     <Button 
-                      onClick={() => this.saveArticle({title:article.headline.main, url:article.web_url, date:article.pub_date})}
+                      onClick={() => this.saveArticle({title:article.headline.main, url:article.web_url, date:article.pub_date, nytID:article._id})}
                       style={{ float: "right", marginBottom: 10 }}
                       className={"btn btn-success"}
                     >
@@ -132,7 +134,7 @@ class Articles extends Component {
         <Row>
           <Col size="md-12">
             <Header>
-              <h1>Saved Articles</h1>
+              Saved Articles
             </Header>
             {this.state.articles.length ? (
               <List>

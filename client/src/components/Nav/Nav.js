@@ -1,10 +1,13 @@
 import React from "react";
 
-const Nav = () => (
-  <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+const Nav = props => (
+  <nav className="navbar navbar-dark bg-primary">
     <a className="navbar-brand" href="/">
-      New York Times - Search Articles
+      {props.brand}
     </a>
+    <span className="text-white">
+      {props.children}
+    </span>
   </nav>
 );
 

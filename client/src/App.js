@@ -7,7 +7,9 @@ import Nav from "./components/Nav";
 const App = () => (
   <Router>
     <div>
-      <Nav />
+      <Nav brand="New York Times - Search Articles">
+        Search for and annotate articles of interest!
+      </Nav>
       <Switch>
         <Route exact path="/" component={Articles} />
         <Route component={NoMatch} />
