@@ -150,6 +150,7 @@ class Articles extends Component {
                     >
                       Remove
                     </Button>
+                    <p>Publication Date: {article.date}</p>
                   </ListItem>
                 ))}
               </List>
