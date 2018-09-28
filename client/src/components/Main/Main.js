@@ -13,10 +13,6 @@ class Main extends Component {
   state = {
     results: [],
     articles: [],
-    title: "",
-    link: "",
-    date: "",
-    nytID: "",
     topic: "",
     startDate: "",
     endDate: ""
@@ -29,14 +25,12 @@ class Main extends Component {
   loadArticles = () => {
     API.getArticles()
       .then(res => {
-        // console.log(`getArticles res: ${JSON.stringify(res)}`)
-        this.setState({ articles: res.data, title: "", link: "", date: "", nytID: ""})
+        this.setState({ articles: res.data})
       })
       .catch(err => console.log(err));
   };
 
   saveArticle = (article) => {
-    console.log(`Article Object: ${JSON.stringify(article)}`)
     API.saveArticle({article})
       .then(res => this.loadArticles())
       .catch(err => console.log(err));
@@ -61,7 +55,6 @@ class Main extends Component {
     // Get articles via nyt api
     API.apiArticles(this.state.topic, this.state.startDate, this.state.endDate)
       .then(res => {
-        // console.log(`apiArticles res: ${JSON.stringify(res)}`)
         this.setState({ results: res, topic: "", startDate: "", endDate: "" })
       })
       .catch(err => console.log(err));
@@ -70,9 +63,7 @@ class Main extends Component {
   render() {
     return (
       <Container>
-        <Jumbotron>
-          {/* <h1>New York Times - Search Articles</h1> */}
-        </Jumbotron>
+        <Jumbotron />
         <p className="pHeader">Search for and annotate articles of interest!</p>
         <Row>
           <Col size="md-12">
