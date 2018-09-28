@@ -64,7 +64,7 @@ class Main extends Component {
     return (
       <Container>
         <Jumbotron />
-        <p className="pHeader">Search for and annotate articles of interest!</p>
+        <p className="pHeader">Search for articles of interest!</p>
         <Row>
           <Col size="md-12">
             <Header>
