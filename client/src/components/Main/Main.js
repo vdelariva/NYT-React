@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import Moment from 'react-moment';
+import API from "../../utils/API";
+import Results from "../Results";
+import Saved from "../Saved";
 import Jumbotron from "../Jumbotron";
 import Header from "../Header";
-import API from "../../utils/API";
 import { Col, Row, Container } from "../Grid";
-import { List, ListItem } from "../List";
 import { Input } from "../Form";
 import Button from "../Button";
 import "./Main.css";
@@ -108,67 +108,16 @@ class Main extends Component {
             </form>
           </Col>
         </Row>
-        <Row>
-          <Col size="md-12">
-            <Header>
-              Results
-            </Header>
-            {this.state.results.length ? (
-              <List>
-                {this.state.results.map(article => (
-                  <ListItem key={article._id}>
-                    <a href={article.web_url} target="_blank">
-                      <strong>
-                        {article.headline.main}
-                      </strong>
-                    </a>
-                    <Button 
-                      onClick={() => this.saveArticle({title:article.headline.main, url:article.web_url, date:article.pub_date, nytID:article._id})}
-                      style={{ float: "right", marginBottom: 10 }}
-                      className={"btn btn-success"}
-                    >
-                      Save
-                    </Button>
-                  </ListItem>
-                ))}
-              </List>
-            ) : (
-              <h3>No Results to Display</h3>
-            )}
-          </Col>
-        </Row>
-        <Row>
-          <Col size="md-12">
-            <Header>
-              Saved Articles
-            </Header>
-            {this.state.articles.length ? (
-              <List>
-                {this.state.articles.map(article => (
-                  <ListItem key={article._id}>
-                    <a href={article.url} target="_blank">
-                      <strong>
-                        {article.title}
-                      </strong>
-                    </a>
-                    <Button 
-                      onClick={() => this.deleteArticle(article._id)}
-                      style={{ float: "right", marginBottom: 10 }}
-                      className={"btn btn-danger"}
-                    >
-                      Remove
-                    </Button>
-                    <p>
-                      Publication Date: <Moment format="MM/DD/YYYY">{article.date}</Moment>
-                    </p>
-                  </ListItem>
-                ))}
-              </List>
-            ) : (
-              <h3>No Saved Articles</h3>
-            )}
-          </Col>
-        </Row>
+
+        {/* Render only if there are search results */}
+        { this.state.results.length > 0 &&
+          <Results results={this.state.results} saveArticle={this.saveArticle} />
+        }
+
+        {/* Render only if there are saved articles */}
+        { this.state.articles.length > 0 &&
+          <Saved articles={this.state.articles} deleteArticle={this.deleteArticle}/>
+        }
       </Container>
     );
   }
