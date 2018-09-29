@@ -22,12 +22,8 @@ module.exports = {
       .catch(err => res.status(422).json(err))
   },
   create: function(req, res) {
-    console.log(`Article Body:`)
-    console.log(JSON.stringify(req.body))
-    console.log(`Article Object:`)
-    console.log(JSON.stringify(req.body.article))
     db.Article
-      .create(req.body.article)
+      .create(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

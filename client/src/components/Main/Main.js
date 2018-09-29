@@ -31,7 +31,7 @@ class Main extends Component {
   };
 
   saveArticle = (article) => {
-    API.saveArticle({article})
+    API.saveArticle(article)
       .then(res => this.loadArticles())
       .catch(err => console.log(err));
 }
@@ -64,7 +64,7 @@ class Main extends Component {
     return (
       <Container>
         <Jumbotron />
-        <p className="pHeader">Search for articles of interest!</p>
+        <p className="pHeader">Search for and save articles of interest!</p>
         <Row>
           <Col size="md-12">
             <Header>
